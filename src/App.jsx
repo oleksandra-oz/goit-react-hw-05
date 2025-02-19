@@ -13,6 +13,7 @@ import MoviesPage from "./pages/MoviesPage";
 function App() {
   const [movies, setMovies] = useState([]); // Список знайдених фільмів
   const [error, setError] = useState(null); // Стан для помилки
+
   const searchMovies = async (query) => {
     try {
       const { data } = await axios.get(
@@ -23,6 +24,7 @@ function App() {
       setError("Error fetching movies");
     }
   };
+
   return (
     <>
       <Navigation />
@@ -30,7 +32,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/movies"
-          element={<MoviesPage onSubmit={searchMovies} movies={movies} />}
+          element={<MoviesPage movies={movies} searchMovies={searchMovies} />}
         />
         <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
           <Route path="cast" element={<MovieCast />} />
