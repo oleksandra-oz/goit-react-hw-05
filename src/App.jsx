@@ -2,13 +2,22 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation.jsx";
 import HomePage from "./pages/HomePage.jsx";
-import NotFoundPage from "./pages/NotFoundPage.jsx";
-import MovieCast from "./components/MovieCast/MovieCast.jsx";
-import MovieReviews from "./components/MovieReviews/MovieReviews.jsx";
-import MovieDetailsPage from "./pages/MovieDetailsPage.jsx";
-import { useState } from "react";
+// import NotFoundPage from "./pages/NotFoundPage.jsx";
+// import MovieCast from "./components/MovieCast/MovieCast.jsx";
+// import MovieReviews from "./components/MovieReviews/MovieReviews.jsx";
+// import MovieDetailsPage from "./pages/MovieDetailsPage.jsx";
+import { Suspense, useState } from "react";
 import axios from "axios";
-import MoviesPage from "./pages/MoviesPage";
+// import MoviesPage from "./pages/MoviesPage";
+import { lazy } from "react";
+
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage.jsx"));
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast.jsx"));
+const MovieReviews = lazy(() =>
+  import("./components/MovieReviews/MovieReviews.jsx")
+);
+const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage.jsx"));
+const MoviesPage = lazy(() => import("./pages/MoviesPage"));
 
 function App() {
   const [movies, setMovies] = useState([]); // Список знайдених фільмів
@@ -27,18 +36,20 @@ function App() {
   return (
     <>
       <Navigation />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
-          path="/movies"
-          element={<MoviesPage searchMovies={searchMovies} movies={movies} />}
-        />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<MovieCast />} />
-          <Route path="reviews" element={<MovieReviews />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<>Loading...</>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/movies"
+            element={<MoviesPage searchMovies={searchMovies} movies={movies} />}
+          />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

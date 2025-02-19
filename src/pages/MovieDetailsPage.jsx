@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { fetchMoviesById } from "../api";
 import MovieCast from "../components/MovieCast/MovieCast.jsx";
 import s from "../MoviesDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-
+  const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const goBackUrl = useRef(location?.state ?? "/movies");
 
   useEffect(() => {
     const getData = async () => {
@@ -24,6 +32,7 @@ const MovieDetailsPage = () => {
   return (
     <div className={s.moviedetailspage}>
       <p>ID of movie: {movieId}</p>
+      <Link to={goBackUrl.current}>Go Back</Link>
       {movie ? (
         <>
           <div className={s.moviedetailscontainer}>
