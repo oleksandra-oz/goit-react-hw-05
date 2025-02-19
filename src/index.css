@@ -12,7 +12,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+ul {
+  list-style-type: none;
+  font-size: larger;
+  padding-left: 0;
+  margin-left: 0;
+}
+li {
+  text-align: left;
+}
 a {
   font-weight: 500;
   color: #646cff;

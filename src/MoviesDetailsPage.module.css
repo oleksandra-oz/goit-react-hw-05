@@ -1,0 +1,103 @@
+/* Загальні стилі для MovieDetailsPage */
+.moviedetailspage {
+  background-color: #f7f7f7;
+  padding: 30px 20px;
+}
+
+.moviedetailspage h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.moviedetailspage p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.moviedetailspage .loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+/* Стилі для розміщення фільму */
+.moviedetailscontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.moviedetailsimg {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.moviedetailsinfo {
+  flex-grow: 1;
+  max-width: 60%;
+}
+
+.moviedetailsinfo h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.moviedetailsinfo ul {
+  margin-top: 20px;
+}
+
+.moviedetailsinfo ul li {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.moviedetailsinfo ul li strong {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Стилі для навігації */
+.moviedetailsnav {
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.moviedetailsnav a {
+  font-size: 1.2rem;
+  color: #007bff;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.moviedetailsnav a:hover {
+  color: #0056b3;
+}
+
+/* Відступи і адаптивність */
+@media (max-width: 768px) {
+  .moviedetailscontainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .moviedetailsinfo {
+    max-width: 100%;
+  }
+
+  .moviedetailsimg {
+    max-width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .moviedetailsnav {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
