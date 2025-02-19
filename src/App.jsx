@@ -12,16 +12,15 @@ import MoviesPage from "./pages/MoviesPage";
 
 function App() {
   const [movies, setMovies] = useState([]); // Список знайдених фільмів
-  const [error, setError] = useState(null); // Стан для помилки
 
   const searchMovies = async (query) => {
     try {
       const { data } = await axios.get(
-        `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=YOUR_API_KEY&language=en-US`
+        `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=05e456d46a8dfe98f1cd1e6a7a49575e&language=en-US`
       );
       setMovies(data.results);
     } catch (error) {
-      setError("Error fetching movies");
+      setError("Error fetching movies", error);
     }
   };
 
@@ -32,7 +31,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/movies"
-          element={<MoviesPage movies={movies} searchMovies={searchMovies} />}
+          element={<MoviesPage searchMovies={searchMovies} movies={movies} />}
         />
         <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
           <Route path="cast" element={<MovieCast />} />

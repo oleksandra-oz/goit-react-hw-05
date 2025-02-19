@@ -4,12 +4,11 @@ import SearchBar from "../components/SearchBar/SearchBar.jsx";
 
 const MoviesPage = ({ movies, searchMovies }) => {
   return (
-    <>
+    <div>
+      <h1>Search Movies</h1>
       <SearchBar onSubmit={searchMovies} />
-      <div>
-        <MovieList movies={movies} />
-      </div>
-    </>
+      {movies.length > 0 && <MovieList movies={movies} />}
+    </div>
   );
 };
 

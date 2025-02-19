@@ -11,16 +11,17 @@ const SearchBar = ({ onSubmit }) => {
     <div>
       <Formik
         initialValues={{ query: "" }}
-        onSubmit={(values) => {
+        onSubmit={(values, { resetForm }) => {
           if (!values.query.trim()) {
             notify();
             return;
           }
           onSubmit(values.query.trim());
+          resetForm();
         }}
       >
         <Form>
-          <Field name="query" />
+          <Field name="query" placeholder="Enter movie title..." />
           <button type="submit">Search</button>
         </Form>
       </Formik>
