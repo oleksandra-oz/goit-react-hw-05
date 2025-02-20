@@ -16,7 +16,7 @@ const MoviesPage = () => {
     const searchMovies = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=YOUR_API_KEY&language=en-US`
+          `https://api.themoviedb.org/3/search/movie?query=${query}&api_key=05e456d46a8dfe98f1cd1e6a7a49575e&language=en-US`
         );
         const data = await response.json();
         setMovies(data.results);
