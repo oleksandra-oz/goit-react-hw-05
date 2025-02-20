@@ -1,21 +1,23 @@
-import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import toast from "react-hot-toast";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchBar = ({ onSubmit }) => {
-  const [query, setQuery] = useState("");
-
-  const notify = () => toast.error("Cannot be empty");
   const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <div>
-      {/* <Link to={location.state}>Go Back</Link> */}
+      {/* Кнопка "Go Back", якщо є, звідки повертатись */}
+      {location.state?.from && (
+        <button onClick={() => navigate(location.state.from)}>Go Back</button>
+      )}
+
       <Formik
         initialValues={{ query: "" }}
         onSubmit={(values, { resetForm }) => {
           if (!values.query.trim()) {
-            notify();
+            toast.error("Cannot be empty");
             return;
           }
           onSubmit(values.query.trim());
